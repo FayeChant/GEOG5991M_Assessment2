@@ -70,6 +70,6 @@ To Run as a tool in ArcMap
 * Enter the workspace name.
 * Enter the Obstruction file name.
 
-6. Once this has successfully run, within the TT5 toolbox, double click the 'Graphics' script.
+6. Once this has successfully run, run Graphics.py. Currently the Graphics script will not work in ArcMap as it cant find the Geopandas Librabry. Please run this tool, for example in Spyder.
 
 * Enter the workspace name e.g. C:\\GEOG5991M\\Stereoheighting. This will automatically find the required outputs from SHPrep.py.

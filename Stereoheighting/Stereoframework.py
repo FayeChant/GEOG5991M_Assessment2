@@ -29,10 +29,10 @@ class Files():
 
     def __init__(self):
         # root directory you're working in
-        self.root = input("type root directory: ")
+        self.root = arcpy.GetParameterAsText(0)
         if self.root == '#' or not self.root:
             self.root = "C:\GEOG5991M\Stereoheighting"  # provide a default value if unspecified
-        self.orig = input("type input points file name")
+        self.orig = arcpy.GetParameterAsText(1)
         if self.orig == '#' or not self.orig:
             self.orig = os.path.join(self.root, "Testdata\OBSTRUCTIONS.shp")  # provide a default value if unspecified
         self.final = os.path.join(self.root, "OUT\\OBSTRUCTIONS_final.shp")
