@@ -1,0 +1,279 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Stereoframework module &#8212; SHPrep 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Graphics module" href="Graphics.html" />
+    <link rel="prev" title="SHPrep module" href="SHPrep.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="stereoframework-module">
+<h1>Stereoframework module<a class="headerlink" href="#stereoframework-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><em>Author</em>:</th><td class="field-body">Faye Chant &lt;<a class="reference external" href="mailto:gy16fc&#37;&#52;&#48;leeds&#46;ac&#46;uk">gy16fc<span>&#64;</span>leeds<span>&#46;</span>ac<span>&#46;</span>uk</a>&gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><em>Date</em>:</th><td class="field-body">2019-09-25</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><em>Revision</em>:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><em>Summary</em>:</th><td class="field-body">The stereoframework module sets up the framework for the SHPrep.py module. It contains the following classes:</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><em>Files</em></li>
+<li><em>Field</em></li>
+<li><em>Features</em>, and</li>
+<li><em>Fishnet</em>.</li>
+</ul>
+</div>
+<div class="section" id="use">
+<h2>Use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h2>
+<p>This module is called in SHPrep.py. The user will be prompted to input the working directory, and an input points file.</p>
+</div>
+<div class="section" id="module-Stereoframework">
+<span id="classes-and-modules"></span><h2>Classes and Modules<a class="headerlink" href="#module-Stereoframework" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Stereoframework.FIELD">
+<em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">FIELD</code><span class="sig-paren">(</span><em>fieldname</em>, <em>fieldtype</em>, <em>decplaces</em>, <em>fieldlen</em>, <em>expression</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#FIELD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.FIELD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>The FIELD class sets up the following field attributes for new fields</strong>; <em>fieldname, fieldtype, decplaces,
+fieldlen, expression</em>.</p>
+<p>field name = text string</p>
+<p>field type = DOUBLE, FLOAT, SHORT, LONG, STRING</p>
+<p>decimal places = the number of decimal places for field types of DOUBLE or FLOAT</p>
+<p>field length = number of characters for field types of STRING</p>
+<p>“expression” will be used in the field calculator to copy over the original field name (re-format it) or set a
+default value</p>
+<dl class="method">
+<dt id="Stereoframework.FIELD.calcfield">
+<code class="descname">calcfield</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#FIELD.calcfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.FIELD.calcfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method uses the field calculator to migrate the existing fields to the new correctly formatted fields</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.FIELD.printing">
+<code class="descname">printing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#FIELD.printing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.FIELD.printing" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method prints the field attributes to check the FIELD class framework is successfully applied</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="Stereoframework.Features">
+<em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">Features</code><span class="sig-paren">(</span><em>featureclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>The Features class sets up and manipulates the feature class shapefiles.</strong></p>
+<dl class="method">
+<dt id="Stereoframework.Features.coord_sys">
+<code class="descname">coord_sys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.coord_sys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.coord_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method sets the coordinate system as the spatial reference of the shapefile (for the fishnet tool).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Features.maxfromshp">
+<code class="descname">maxfromshp</code><span class="sig-paren">(</span><em>featureclass</em>, <em>variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.maxfromshp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.maxfromshp" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method calculates the maximum value from a variable within a feature class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Features.opp_corner">
+<code class="descname">opp_corner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.opp_corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.opp_corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method uses the describe tool in ArcPy to generate the upper right corner coordinates of a
+feature class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Features.origin">
+<code class="descname">origin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method uses the describe tool in ArcPy to generate the lower left corner coordinates of a
+feature class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Features.yaxis">
+<code class="descname">yaxis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.yaxis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.yaxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method uses the describe tool in ArcPy to generate the YAxis coordinates of a feature class
+(for use in the fishnet tool).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="Stereoframework.Files">
+<em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">Files</code><a class="reference internal" href="_modules/Stereoframework.html#Files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>The “files” class sets the file paths of the files to use.</strong></p>
+<p>It will generate the following files:</p>
+<p><em>Original point file</em> - input by user (Default “OBSTRUCTIONS.shp”)</p>
+<p><em>Final</em> - reformatted with unwanted fields removed, sorted by geographic location - input by user
+(default = OUTOBSTRUCTIONS_final.SHP”)</p>
+<p><em>Fishnet</em> - polygon file to define cells for splitting up the point file.</p>
+<p><em>Fishnet_Count</em> - Spatial join of Final and Fishnet with count of points in each cells</p>
+<p><em>Copy</em> - temporary file. A copy of Original</p>
+<p><em>Tempfishnet</em> - temporary file. Used for optimising fishnet</p>
+<p><em>Fishnet2Obstr</em> - temporary file. Used to intersect points with Polygon and assign cell number for exporting
+shapefiles of points within individual cells.</p>
+<dl class="method">
+<dt id="Stereoframework.Files.deletefiles">
+<code class="descname">deletefiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Files.deletefiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Files.deletefiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method deletes unwanted/temporary files</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Files.printing">
+<code class="descname">printing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Files.printing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Files.printing" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method prints the filenames to check the Class framework is successfully applied.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="Stereoframework.Fishnet">
+<em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">Fishnet</code><span class="sig-paren">(</span><em>featureclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Stereoframework.Features" title="Stereoframework.Features"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stereoframework.Features</span></code></a></p>
+<p><strong>The Fishnet class sets up the methods to optimise the fishnet over the points file, and exporting shapefiles
+of points within individual cells.</strong></p>
+<dl class="method">
+<dt id="Stereoframework.Fishnet.divpts2cells">
+<code class="descname">divpts2cells</code><span class="sig-paren">(</span><em>grid2pts</em>, <em>counter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.divpts2cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.divpts2cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method outputs the points contained within each cell to an individual shapefile.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Fishnet.grid">
+<code class="descname">grid</code><span class="sig-paren">(</span><em>code_block</em>, <em>numrows</em>, <em>tempfishnet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method sets up the fishnet tool from arcpy and calculates an id number for each cell of the fishnet.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Fishnet.intersect">
+<code class="descname">intersect</code><span class="sig-paren">(</span><em>grid2pts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.intersect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.intersect" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method intersects the points with the fishnet to assign the id number of the fishnet cell within
+which each point resides.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Stereoframework.Fishnet.joinpts2grid">
+<code class="descname">joinpts2grid</code><span class="sig-paren">(</span><em>tempfishnet</em>, <em>sorted</em>, <em>fishnet_count</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.joinpts2grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.joinpts2grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method joins the points to the fishnet cells to count how many points fall in each cell.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SHPrep</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Instructions.html">Instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Stereoheighting Preparation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SHPrep.html">SHPrep module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Stereoframework module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Graphics.html">Graphics module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UML.html">UML for SHPrep &amp; Graphics</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Stereoheighting Preparation</a><ul>
+      <li>Previous: <a href="SHPrep.html" title="previous chapter">SHPrep module</a></li>
+      <li>Next: <a href="Graphics.html" title="next chapter">Graphics module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Faye Chant.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Stereoframework.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

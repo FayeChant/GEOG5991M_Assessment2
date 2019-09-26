@@ -1,0 +1,183 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Graphics &#8212; SHPrep 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for Graphics</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Python Scipt to run after SHPrep.py</span>
+<span class="c1"># Process:Print overview graphic of obstructions point file on to fishnet</span>
+
+<span class="c1"># O.Import modules required</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+
+
+<span class="c1"># 1. Create a class to define all the files to use.</span>
+<div class="viewcode-block" id="Files"><a class="viewcode-back" href="../Graphics.html#Graphics.Files">[docs]</a><span class="k">class</span> <span class="nc">Files</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;**Class description**.</span>
+<span class="sd">    </span>
+<span class="sd">      The &quot;files&quot; class sets the file paths of the files to use</span>
+<span class="sd">      </span>
+<span class="sd">      It will use the following files:</span>
+<span class="sd">      </span>
+<span class="sd">      *Final*. Input - reformatted &#39;obstructions&#39; point file with unwanted fields removed, sorted by geographic location</span>
+<span class="sd">     </span>
+<span class="sd">      *Fishnet_Count*. Input - Spatial join of Final and Fishnet with count of po   ints in each cell.</span>
+<span class="sd">     </span>
+<span class="sd">      *jpg*. - Output - graphic plot saved by running this module.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># root directory you&#39;re working in</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;type root directory: &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">GEOG5991M</span><span class="se">\\</span><span class="s2">Stereoheighting&quot;</span>  <span class="c1"># provide a default value if unspecified</span>
+        <span class="c1"># final point file from SHprep.py</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">OBSTRUCTIONS_final.shp&quot;</span><span class="p">)</span>  <span class="c1"># provide a default value if unspecified</span>
+        <span class="c1"># final fishnet with point counts from SHprep.py</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fishnet_count</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;type output fishnet_ptcount file name from SHPrep: &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fishnet_count</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fishnet_count</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">OBSTRUCTIONS_Fishnet_ptcount.shp&quot;</span><span class="p">)</span>
+        <span class="c1"># output graphic file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jpg</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">OBSTRUCTIONS_Fishnet_overview.jpg&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Files.printing"><a class="viewcode-back" href="../Graphics.html#Graphics.Files.printing">[docs]</a>    <span class="k">def</span> <span class="nf">printing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This method prints the filenames to check the Files class framework is successfully applied&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Files set to: Point file = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">final</span><span class="p">,</span> <span class="s2">&quot;Fishnet with point count = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fishnet_count</span><span class="p">)</span></div></div>
+
+
+<span class="c1"># 2. Create graphic</span>
+<span class="c1"># 2.1 Setup</span>
+<span class="c1"># Copy framework for files from class Files.</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">Files</span><span class="p">()</span>
+<span class="c1"># Run &quot;printing&quot; method to check filepaths set correctly</span>
+<span class="n">files</span><span class="o">.</span><span class="n">printing</span><span class="p">()</span>
+<span class="c1"># 2.2 Print Graphic</span>
+<span class="c1"># error capture</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># set graphic up</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude, decimal degrees&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude, decimal degrees&quot;</span><span class="p">)</span>
+    <span class="c1"># read fishnet file</span>
+    <span class="n">fishnet</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">files</span><span class="o">.</span><span class="n">fishnet_count</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;shapefile&#39;</span><span class="p">)</span>
+    <span class="c1"># plot fishnet file</span>
+    <span class="n">fishnet</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">);</span>
+    <span class="c1"># read points file</span>
+    <span class="n">obstr</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">files</span><span class="o">.</span><span class="n">final</span><span class="p">)</span>
+    <span class="c1"># plot points file</span>
+    <span class="n">obstr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
+    <span class="c1"># plot annotations of each cell number</span>
+    <span class="n">fishnet</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">Id</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+    <span class="c1"># save file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">jpg</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;portrait&#39;</span><span class="p">,</span> <span class="n">papertype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="n">frameon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Program complete&quot;</span><span class="p">)</span>
+<span class="c1"># COMPLETE</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">SHPrep</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Instructions.html">Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Stereoheighting Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UML.html">UML for SHPrep &amp; Graphics</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Faye Chant.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

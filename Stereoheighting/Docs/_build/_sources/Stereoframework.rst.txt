@@ -1,0 +1,28 @@
+Stereoframework module
+======================
+Description
+---------------
+:*Author*: Faye Chant <gy16fc@leeds.ac.uk>
+:*Date*: 2019-09-25
+:*Revision*: 1
+:*Summary*: The stereoframework module sets up the framework for the SHPrep.py module. It contains the following classes:
+
++ *Files*
++ *Field*
++ *Features*, and
++ *Fishnet*.
+
+Use
+---
+
+This module is called in SHPrep.py. The user will be prompted to input the working directory, and an input points file.
+
+Classes and Modules
+-------------------
+
+.. automodule:: Stereoframework
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
