@@ -1,0 +1,205 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Instructions &#8212; SHPrep 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Stereoheighting Preparation" href="modules.html" />
+    <link rel="prev" title="Welcome to SHPrep’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="instructions">
+<h1>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setup">
+<h2><strong>Setup</strong><a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Save the following files, for example to “C:\GEOG5991M\Stereoheighting”:</li>
+</ol>
+<ul class="simple">
+<li>SHPrep.py.</li>
+<li>Stereoheighting.py.</li>
+<li>Stereoframework.pyc</li>
+<li>Graphics.py.</li>
+<li>SHPrep.bat</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Save the test data to for example “C:\GEOG5991M\Stereoheighting\Testdata”.</li>
+<li>Open Stereoheighting.py and edit the defaults at lines 48 and 52 as appropriate:</li>
+</ol>
+<ul class="simple">
+<li>Line 48 - Default working directory if none entered by user at command prompt.</li>
+<li>Line 52 - Default input obstructions File if none entered by user at command prompt.</li>
+</ul>
+<ol class="arabic simple" start="4">
+<li>Open Graphics.py and edit the default at lines 28:</li>
+</ol>
+<ul class="simple">
+<li>Line 28 - Default working directory if none entered by user at command prompt.</li>
+</ul>
+<p>The above is important if running through the batch file, as the prompts for folder/file inputs wont work and the module will use the above defaults. This means you could store the module files in one place, e.g. “C:\Stereoheighting\SHPrep”. You would then just edit the defaults each time you run  the module for a new project, e.g working directory = C:\Stereoheighting\Project1, file = Obstructions.shp.</p>
+<ol class="arabic simple" start="4">
+<li>Create a folder in your working directory called “OUT”. Within this folder, create a folder called “Cells”.</li>
+</ol>
+</div>
+<div class="section" id="running">
+<h2><strong>Running</strong><a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p><em>This module can be run in different ways.</em></p>
+<div class="section" id="to-run-this-as-a-bat-file">
+<h3>To run this as a bat file.<a class="headerlink" href="#to-run-this-as-a-bat-file" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Edit the SHPrep.bat file:</li>
+</ol>
+<ul class="simple">
+<li>Ensure the first part on both lines is the correct location of your python install for ArcGIS. e.g. C:\Python27\ArcGIS10.4\python.exe.</li>
+<li>Change the location after the “&gt;” to your working directory, or delete this part if you dont want a messages file retained.</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Double click the .bat file to run.</li>
+</ol>
+</div>
+<div class="section" id="to-run-this-on-command-prompt">
+<h3>To Run this on command prompt<a class="headerlink" href="#to-run-this-on-command-prompt" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Open command prompt from wherever you saved the python scripts.</li>
+<li>Type “C:Python27ArcGIS10.4python.exe SHprep.py” - NOTE: the first part must correspond to the correct location of your python install for ArcGIS. This will display any messages to the command prompt. Typing C:\Python27\ArcGIS10.4\python.exe SHprep.py &gt; “Root path”\OUTSHPmessages.txt will pipe messages to a text file.</li>
+</ol>
+<ul class="simple">
+<li>Enter working directory including quotes e.g. “C:\GEOG5991M\Stereoheighting”</li>
+<li>Enter obstructions points file including quotes e.g. “OBSTRUCTIONS.shp”</li>
+<li>Note - for either of the above - if you just type ‘#’ (including the single quotes)- the defaults previously set will apply.</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li>Type “C:Python27ArcGIS10.4python.exe Graphics.py” - NOTE: the first part must correspond to the correct location of your python install for ArcGIS. This will display any messages to the command prompt.  Typing C:\Python27\ArcGIS10.4\python.exe Graphics.py &gt; “Root ptah”\OUTGPHmessages.txt will pipe messages to a text file.</li>
+</ol>
+<ul class="simple">
+<li>Enter working directory including quotes e.g. “C:\GEOG5991M\Stereoheighting”</li>
+<li>Note - for the above - if you just type ‘#’ (including the single quotes)- the defaults previously set will apply.</li>
+</ul>
+</div>
+<div class="section" id="to-run-as-a-tool-in-arcmap">
+<h3>To Run as a tool in ArcMap<a class="headerlink" href="#to-run-as-a-tool-in-arcmap" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Open ArcMap</li>
+<li>Open your obstruction file.</li>
+<li>Click on ArcToolbox</li>
+<li>Add a new toolbox, select the TT5 toolbox.</li>
+<li>Within the TT5 toolbox, double click the ‘SHPrep’ script.</li>
+</ol>
+<ul class="simple">
+<li>Enter the workspace name.</li>
+<li>Enter the Obstruction file name.</li>
+</ul>
+<ol class="arabic simple" start="6">
+<li>Once this has successfully run, run Graphics.py. Currently the Graphics script will not work in ArcMap as it cant find the Geopandas Librabry. Please run this tool, for example in Spyder.</li>
+</ol>
+<ul class="simple">
+<li>Enter the workspace name e.g. C:\GEOG5991M\Stereoheighting. This will automatically find the required outputs from SHPrep.py.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">SHPrep</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup"><strong>Setup</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running"><strong>Running</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Stereoheighting Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UML.html">UML for SHPrep &amp; Graphics</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to SHPrep’s documentation!</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">Stereoheighting Preparation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Faye Chant.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Instructions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
