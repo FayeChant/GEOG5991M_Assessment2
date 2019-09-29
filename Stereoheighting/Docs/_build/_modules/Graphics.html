@@ -46,9 +46,7 @@
 <div class="viewcode-block" id="Files"><a class="viewcode-back" href="../Graphics.html#Graphics.Files">[docs]</a><span class="k">class</span> <span class="nc">Files</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;**Class description**.</span>
 <span class="sd">    </span>
-<span class="sd">      The &quot;files&quot; class sets the file paths of the files to use</span>
-<span class="sd">      </span>
-<span class="sd">      It will use the following files:</span>
+<span class="sd">      Set the file paths of the files to use</span>
 <span class="sd">      </span>
 <span class="sd">      *Final*. Input - reformatted &#39;obstructions&#39; point file with unwanted fields removed, sorted by geographic location</span>
 <span class="sd">     </span>
@@ -71,7 +69,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">jpg</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">OBSTRUCTIONS_Fishnet_overview.jpg&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Files.printing"><a class="viewcode-back" href="../Graphics.html#Graphics.Files.printing">[docs]</a>    <span class="k">def</span> <span class="nf">printing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method prints the filenames to check the Files class framework is successfully applied&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Print the filenames to check the Files class framework is successfully applied&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Files set to: Point file = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">final</span><span class="p">,</span> <span class="s2">&quot;Fishnet with point count = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fishnet_count</span><span class="p">)</span></div></div>
 
 

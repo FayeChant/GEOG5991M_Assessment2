@@ -1,15 +1,28 @@
+"""Stereoheighting data preparation tool.
+Copyright (C) <2019>  <Faye Chant>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>."""
 # 0 SETUP ACTIVITIES
 import os
 import arcpy
 #from arcpy import env
-
-
 #arcpy.env.overwriteOutput = True
+
+
 # CREATE CLASS
 class Files():
-    """**The "files" class sets the file paths of the files to use.**
-      
-      It will generate the following files:
+    """**Set the file paths of the files to use.**
       
       *Original point file* - input by user (Default "OBSTRUCTIONS.shp")
      
@@ -42,18 +55,18 @@ class Files():
         self.fishnet2obstr = os.path.join(self.root, "OUT\\Fishnet_OBSTRUCTIONS_ID.shp")
 
     def printing(self):
-        """This method prints the filenames to check the Class framework is successfully applied."""
+        """Print the filenames to check the Class framework is successfully applied."""
         print("orig = ", self.orig, "final = ", self.final, "copy = ", self.copy)
 
     def deletefiles(self):
-        """This method deletes unwanted/temporary files """
+        """Delete unwanted/temporary files """
         arcpy.Delete_management(self.tempfishnet)
         arcpy.Delete_management(self.copy)
         arcpy.Delete_management(self.fishnet2obstr)   
 
 #        arcpy.Delete_management(self.Fishnet_count)
 class FIELD():
-    """**The FIELD class sets up the following field attributes for new fields**; *fieldname, fieldtype, decplaces,
+    """**Set field attributes for new fields**; *fieldname, fieldtype, decplaces,
     fieldlen, expression*.
   
     field name = text string
@@ -64,7 +77,7 @@ class FIELD():
     
     field length = number of characters for field types of STRING
     
-    "expression" will be used in the field calculator to copy over the original field name (re-format it) or set a
+    "expression" to be used in the field calculator to copy over the original field name (re-format it) or set a
     default value"""
 
     def __init__(self, fieldname, fieldtype, decplaces, fieldlen, expression):
@@ -75,25 +88,25 @@ class FIELD():
         self.expression = expression
 
     def printing(self):
-        """This method prints the field attributes to check the FIELD class framework is successfully applied"""
+        """Print the field attributes to check the Field class framework is successfully applied"""
         print("fieldname = ", self.fieldname, ", fieldtype = ", self.fieldtype, ", number of dec places = ",
               self.decplaces, ", field length = ", self.fieldlen,
               "expression = ", self.expression)
 
     def calcfield(self, file):
-        """This method uses the field calculator to migrate the existing fields to the new correctly formatted fields"""
+        """Copy the existing fields to the new correctly formatted fields"""
         arcpy.CalculateField_management(file, self.fieldname, self.expression, "VB", "")
 
 
 class Features():
-    """**The Features class sets up and manipulates the feature class shapefiles.**"""
+    """**Set up and manipulates the feature class shapefiles.**"""
 
     def __init__(self, featureclass):
         self.Featureclass = featureclass
         self.desc = arcpy.Describe(self.Featureclass)
 
     def maxfromshp(self, featureclass, variable):
-        """This method calculates the maximum value from a variable within a feature class."""
+        """Calculate the maximum value from a variable within a feature class."""
         cursor = arcpy.da.SearchCursor(featureclass, variable)
         firstrecord = True
         for row in cursor:
@@ -105,35 +118,35 @@ class Features():
         return maxvalue
 
     def origin(self):
-        """ This method uses the describe tool in ArcPy to generate the lower left corner coordinates of a
+        """ USe the describe tool in ArcPy to generate the lower left corner coordinates of a
         feature class."""
         origin = str(self.desc.extent.XMin) + " " + str(self.desc.extent.YMin)
         return origin
 
     def yaxis(self):
-        """ This method uses the describe tool in ArcPy to generate the YAxis coordinates of a feature class
+        """ Use the describe tool in ArcPy to generate the YAxis coordinates of a feature class
         (for use in the fishnet tool)."""
         yaxis = str(self.desc.extent.XMin) + " " + str(self.desc.extent.YMin + 10)
         return yaxis
 
     def opp_corner(self):
-        """ This method uses the describe tool in ArcPy to generate the upper right corner coordinates of a
+        """ Use the describe tool in ArcPy to generate the upper right corner coordinates of a
         feature class."""
         opp_corner = str(self.desc.extent.XMax) + " " + str(self.desc.extent.YMax)
         return opp_corner
 
     def coord_sys(self):
-        """This method sets the coordinate system as the spatial reference of the shapefile (for the fishnet tool)."""
+        """Set the coordinate system as the spatial reference of the shapefile (for the fishnet tool)."""
         coord_sys = self.desc.spatialReference
         return coord_sys
 
 
 class Fishnet(Features):
-    """**The Fishnet class sets up the methods to optimise the fishnet over the points file, and exporting shapefiles
+    """**Set up the methods to optimise the fishnet over the points file, and exporting shapefiles
     of points within individual cells.**"""
 
     def grid(self, code_block, numrows, tempfishnet):
-        """This method sets up the fishnet tool from arcpy and calculates an id number for each cell of the fishnet."""
+        """Set up the fishnet tool from arcpy and calculate an id number for each cell of the fishnet."""
         origin = self.origin()
         yaxis = self.yaxis()
         opp_corner = self.opp_corner()
@@ -144,7 +157,7 @@ class Fishnet(Features):
         print("grid ", numcolumns, "by", numrows, "complete")
 
     def joinpts2grid(self, tempfishnet, sorted, fishnet_count):
-        """This method joins the points to the fishnet cells to count how many points fall in each cell."""
+        """Join the points to the fishnet cells to count how many points fall in each cell."""
         # count points in each polygon of the fishnet
         targetfeatures = tempfishnet
         joinfeatures = sorted
@@ -155,7 +168,7 @@ class Fishnet(Features):
         print("spatial join complete")
 
     def intersect(self, grid2pts):
-        """This method intersects the points with the fishnet to assign the id number of the fishnet cell within
+        """Intersect the points with the fishnet to assign the id number of the fishnet cell within
         which each point resides."""
         in_features = ["OUT\\OBSTRUCTIONS_final.shp", "OUT\\OBSTRUCTIONS_fishnet_temp.shp"]
         print(in_features)
@@ -165,7 +178,7 @@ class Fishnet(Features):
         print("intersect complete")
 
     def divpts2cells(self, grid2pts, counter):
-        """This method outputs the points contained within each cell to an individual shapefile."""
+        """Output the points contained within each cell to an individual shapefile."""
         output = ("OUT\\Cells\\Obstructions_cell" + str(counter) + ".shp")
         print("saving ", output)
         where_clause = '"id" = ' + "%s" % counter

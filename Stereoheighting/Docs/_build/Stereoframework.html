@@ -69,24 +69,24 @@
 <dt id="Stereoframework.FIELD">
 <em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">FIELD</code><span class="sig-paren">(</span><em>fieldname</em>, <em>fieldtype</em>, <em>decplaces</em>, <em>fieldlen</em>, <em>expression</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#FIELD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.FIELD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p><strong>The FIELD class sets up the following field attributes for new fields</strong>; <em>fieldname, fieldtype, decplaces,
+<p><strong>Set field attributes for new fields</strong>; <em>fieldname, fieldtype, decplaces,
 fieldlen, expression</em>.</p>
 <p>field name = text string</p>
 <p>field type = DOUBLE, FLOAT, SHORT, LONG, STRING</p>
 <p>decimal places = the number of decimal places for field types of DOUBLE or FLOAT</p>
 <p>field length = number of characters for field types of STRING</p>
-<p>“expression” will be used in the field calculator to copy over the original field name (re-format it) or set a
+<p>“expression” to be used in the field calculator to copy over the original field name (re-format it) or set a
 default value</p>
 <dl class="method">
 <dt id="Stereoframework.FIELD.calcfield">
 <code class="descname">calcfield</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#FIELD.calcfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.FIELD.calcfield" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method uses the field calculator to migrate the existing fields to the new correctly formatted fields</p>
+<dd><p>Copy the existing fields to the new correctly formatted fields</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.FIELD.printing">
 <code class="descname">printing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#FIELD.printing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.FIELD.printing" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method prints the field attributes to check the FIELD class framework is successfully applied</p>
+<dd><p>Print the field attributes to check the Field class framework is successfully applied</p>
 </dd></dl>
 
 </dd></dl>
@@ -95,37 +95,37 @@ default value</p>
 <dt id="Stereoframework.Features">
 <em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">Features</code><span class="sig-paren">(</span><em>featureclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p><strong>The Features class sets up and manipulates the feature class shapefiles.</strong></p>
+<p><strong>Set up and manipulates the feature class shapefiles.</strong></p>
 <dl class="method">
 <dt id="Stereoframework.Features.coord_sys">
 <code class="descname">coord_sys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.coord_sys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.coord_sys" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method sets the coordinate system as the spatial reference of the shapefile (for the fishnet tool).</p>
+<dd><p>Set the coordinate system as the spatial reference of the shapefile (for the fishnet tool).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Features.maxfromshp">
 <code class="descname">maxfromshp</code><span class="sig-paren">(</span><em>featureclass</em>, <em>variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.maxfromshp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.maxfromshp" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method calculates the maximum value from a variable within a feature class.</p>
+<dd><p>Calculate the maximum value from a variable within a feature class.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Features.opp_corner">
 <code class="descname">opp_corner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.opp_corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.opp_corner" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method uses the describe tool in ArcPy to generate the upper right corner coordinates of a
+<dd><p>Use the describe tool in ArcPy to generate the upper right corner coordinates of a
 feature class.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Features.origin">
 <code class="descname">origin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.origin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.origin" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method uses the describe tool in ArcPy to generate the lower left corner coordinates of a
+<dd><p>USe the describe tool in ArcPy to generate the lower left corner coordinates of a
 feature class.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Features.yaxis">
 <code class="descname">yaxis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Features.yaxis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Features.yaxis" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method uses the describe tool in ArcPy to generate the YAxis coordinates of a feature class
+<dd><p>Use the describe tool in ArcPy to generate the YAxis coordinates of a feature class
 (for use in the fishnet tool).</p>
 </dd></dl>
 
@@ -135,8 +135,7 @@ feature class.</p>
 <dt id="Stereoframework.Files">
 <em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">Files</code><a class="reference internal" href="_modules/Stereoframework.html#Files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p><strong>The “files” class sets the file paths of the files to use.</strong></p>
-<p>It will generate the following files:</p>
+<p><strong>Set the file paths of the files to use.</strong></p>
 <p><em>Original point file</em> - input by user (Default “OBSTRUCTIONS.shp”)</p>
 <p><em>Final</em> - reformatted with unwanted fields removed, sorted by geographic location - input by user
 (default = OUTOBSTRUCTIONS_final.SHP”)</p>
@@ -149,13 +148,13 @@ shapefiles of points within individual cells.</p>
 <dl class="method">
 <dt id="Stereoframework.Files.deletefiles">
 <code class="descname">deletefiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Files.deletefiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Files.deletefiles" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method deletes unwanted/temporary files</p>
+<dd><p>Delete unwanted/temporary files</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Files.printing">
 <code class="descname">printing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Files.printing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Files.printing" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method prints the filenames to check the Class framework is successfully applied.</p>
+<dd><p>Print the filenames to check the Class framework is successfully applied.</p>
 </dd></dl>
 
 </dd></dl>
@@ -164,31 +163,31 @@ shapefiles of points within individual cells.</p>
 <dt id="Stereoframework.Fishnet">
 <em class="property">class </em><code class="descclassname">Stereoframework.</code><code class="descname">Fishnet</code><span class="sig-paren">(</span><em>featureclass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#Stereoframework.Features" title="Stereoframework.Features"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stereoframework.Features</span></code></a></p>
-<p><strong>The Fishnet class sets up the methods to optimise the fishnet over the points file, and exporting shapefiles
+<p><strong>Set up the methods to optimise the fishnet over the points file, and exporting shapefiles
 of points within individual cells.</strong></p>
 <dl class="method">
 <dt id="Stereoframework.Fishnet.divpts2cells">
 <code class="descname">divpts2cells</code><span class="sig-paren">(</span><em>grid2pts</em>, <em>counter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.divpts2cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.divpts2cells" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method outputs the points contained within each cell to an individual shapefile.</p>
+<dd><p>Output the points contained within each cell to an individual shapefile.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Fishnet.grid">
 <code class="descname">grid</code><span class="sig-paren">(</span><em>code_block</em>, <em>numrows</em>, <em>tempfishnet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method sets up the fishnet tool from arcpy and calculates an id number for each cell of the fishnet.</p>
+<dd><p>Set up the fishnet tool from arcpy and calculate an id number for each cell of the fishnet.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Fishnet.intersect">
 <code class="descname">intersect</code><span class="sig-paren">(</span><em>grid2pts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.intersect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.intersect" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method intersects the points with the fishnet to assign the id number of the fishnet cell within
+<dd><p>Intersect the points with the fishnet to assign the id number of the fishnet cell within
 which each point resides.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Stereoframework.Fishnet.joinpts2grid">
 <code class="descname">joinpts2grid</code><span class="sig-paren">(</span><em>tempfishnet</em>, <em>sorted</em>, <em>fishnet_count</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Stereoframework.html#Fishnet.joinpts2grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Stereoframework.Fishnet.joinpts2grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method joins the points to the fishnet cells to count how many points fall in each cell.</p>
+<dd><p>Join the points to the fishnet cells to count how many points fall in each cell.</p>
 </dd></dl>
 
 </dd></dl>

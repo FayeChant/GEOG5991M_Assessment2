@@ -1,3 +1,19 @@
+"""Stereoheighting data preparation tool.
+Copyright (C) <2019>  <Faye Chant>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>."""
+
 # Python Scipt to run after SHPrep.py
 # Process:Print overview graphic of obstructions point file on to fishnet
 
@@ -11,13 +27,11 @@ import geopandas as gpd
 class Files():
     """**Class description**.
     
-      The "files" class sets the file paths of the files to use
-      
-      It will use the following files:
-      
+      Set the file paths of the files to use:
+           
       *Final*. Input - reformatted 'obstructions' point file with unwanted fields removed, sorted by geographic location
      
-      *Fishnet_Count*. Input - Spatial join of Final and Fishnet with count of po   ints in each cell.
+      *Fishnet_Count*. Input - Spatial join of Final and Fishnet with count of points in each cell.
      
       *jpg*. - Output - graphic plot saved by running this module."""
 
@@ -36,7 +50,7 @@ class Files():
         self.jpg = os.path.join(self.root, "OUT\\OBSTRUCTIONS_Fishnet_overview.jpg")
 
     def printing(self):
-        """This method prints the filenames to check the Files class framework is successfully applied"""
+        """Print the filenames to check the Files class framework is successfully applied"""
         print("Files set to: Point file = ", self.final, "Fishnet with point count = ", self.fishnet_count)
 
 

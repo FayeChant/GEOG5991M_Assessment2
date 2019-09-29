@@ -37,14 +37,12 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">arcpy</span>
 <span class="c1">#from arcpy import env</span>
-
-
 <span class="c1">#arcpy.env.overwriteOutput = True</span>
+
+
 <span class="c1"># CREATE CLASS</span>
 <div class="viewcode-block" id="Files"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Files">[docs]</a><span class="k">class</span> <span class="nc">Files</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;**The &quot;files&quot; class sets the file paths of the files to use.**</span>
-<span class="sd">      </span>
-<span class="sd">      It will generate the following files:</span>
+    <span class="sd">&quot;&quot;&quot;**Set the file paths of the files to use.**</span>
 <span class="sd">      </span>
 <span class="sd">      *Original point file* - input by user (Default &quot;OBSTRUCTIONS.shp&quot;)</span>
 <span class="sd">     </span>
@@ -64,10 +62,10 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># root directory you&#39;re working in</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">GetParameterAsText</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;type root directory: &quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="s2">&quot;C:\GEOG5991M\Stereoheighting&quot;</span>  <span class="c1"># provide a default value if unspecified</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">orig</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">GetParameterAsText</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orig</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;type input points file name&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">orig</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">orig</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">orig</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;Testdata\OBSTRUCTIONS.shp&quot;</span><span class="p">)</span>  <span class="c1"># provide a default value if unspecified</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">OBSTRUCTIONS_final.shp&quot;</span><span class="p">)</span>
@@ -77,18 +75,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fishnet2obstr</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">Fishnet_OBSTRUCTIONS_ID.shp&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Files.printing"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Files.printing">[docs]</a>    <span class="k">def</span> <span class="nf">printing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method prints the filenames to check the Class framework is successfully applied.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Print the filenames to check the Class framework is successfully applied.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;orig = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">orig</span><span class="p">,</span> <span class="s2">&quot;final = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">final</span><span class="p">,</span> <span class="s2">&quot;copy = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Files.deletefiles"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Files.deletefiles">[docs]</a>    <span class="k">def</span> <span class="nf">deletefiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method deletes unwanted/temporary files &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Delete unwanted/temporary files &quot;&quot;&quot;</span>
         <span class="n">arcpy</span><span class="o">.</span><span class="n">Delete_management</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tempfishnet</span><span class="p">)</span>
         <span class="n">arcpy</span><span class="o">.</span><span class="n">Delete_management</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">)</span>
         <span class="n">arcpy</span><span class="o">.</span><span class="n">Delete_management</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fishnet2obstr</span><span class="p">)</span>   </div></div>
 
 <span class="c1">#        arcpy.Delete_management(self.Fishnet_count)</span>
 <div class="viewcode-block" id="FIELD"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.FIELD">[docs]</a><span class="k">class</span> <span class="nc">FIELD</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;**The FIELD class sets up the following field attributes for new fields**; *fieldname, fieldtype, decplaces,</span>
+    <span class="sd">&quot;&quot;&quot;**Set field attributes for new fields**; *fieldname, fieldtype, decplaces,</span>
 <span class="sd">    fieldlen, expression*.</span>
 <span class="sd">  </span>
 <span class="sd">    field name = text string</span>
@@ -99,7 +97,7 @@
 <span class="sd">    </span>
 <span class="sd">    field length = number of characters for field types of STRING</span>
 <span class="sd">    </span>
-<span class="sd">    &quot;expression&quot; will be used in the field calculator to copy over the original field name (re-format it) or set a</span>
+<span class="sd">    &quot;expression&quot; to be used in the field calculator to copy over the original field name (re-format it) or set a</span>
 <span class="sd">    default value&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">fieldtype</span><span class="p">,</span> <span class="n">decplaces</span><span class="p">,</span> <span class="n">fieldlen</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
@@ -110,25 +108,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">expression</span> <span class="o">=</span> <span class="n">expression</span>
 
 <div class="viewcode-block" id="FIELD.printing"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.FIELD.printing">[docs]</a>    <span class="k">def</span> <span class="nf">printing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method prints the field attributes to check the FIELD class framework is successfully applied&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Print the field attributes to check the Field class framework is successfully applied&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fieldname = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fieldname</span><span class="p">,</span> <span class="s2">&quot;, fieldtype = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fieldtype</span><span class="p">,</span> <span class="s2">&quot;, number of dec places = &quot;</span><span class="p">,</span>
               <span class="bp">self</span><span class="o">.</span><span class="n">decplaces</span><span class="p">,</span> <span class="s2">&quot;, field length = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fieldlen</span><span class="p">,</span>
               <span class="s2">&quot;expression = &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FIELD.calcfield"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.FIELD.calcfield">[docs]</a>    <span class="k">def</span> <span class="nf">calcfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method uses the field calculator to migrate the existing fields to the new correctly formatted fields&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Copy the existing fields to the new correctly formatted fields&quot;&quot;&quot;</span>
         <span class="n">arcpy</span><span class="o">.</span><span class="n">CalculateField_management</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fieldname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression</span><span class="p">,</span> <span class="s2">&quot;VB&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Features"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Features">[docs]</a><span class="k">class</span> <span class="nc">Features</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;**The Features class sets up and manipulates the feature class shapefiles.**&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;**Set up and manipulates the feature class shapefiles.**&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">featureclass</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Featureclass</span> <span class="o">=</span> <span class="n">featureclass</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">Describe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Featureclass</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Features.maxfromshp"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Features.maxfromshp">[docs]</a>    <span class="k">def</span> <span class="nf">maxfromshp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">featureclass</span><span class="p">,</span> <span class="n">variable</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method calculates the maximum value from a variable within a feature class.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the maximum value from a variable within a feature class.&quot;&quot;&quot;</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">da</span><span class="o">.</span><span class="n">SearchCursor</span><span class="p">(</span><span class="n">featureclass</span><span class="p">,</span> <span class="n">variable</span><span class="p">)</span>
         <span class="n">firstrecord</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
@@ -140,35 +138,35 @@
         <span class="k">return</span> <span class="n">maxvalue</span></div>
 
 <div class="viewcode-block" id="Features.origin"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Features.origin">[docs]</a>    <span class="k">def</span> <span class="nf">origin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This method uses the describe tool in ArcPy to generate the lower left corner coordinates of a</span>
+        <span class="sd">&quot;&quot;&quot; USe the describe tool in ArcPy to generate the lower left corner coordinates of a</span>
 <span class="sd">        feature class.&quot;&quot;&quot;</span>
         <span class="n">origin</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">extent</span><span class="o">.</span><span class="n">XMin</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">extent</span><span class="o">.</span><span class="n">YMin</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">origin</span></div>
 
 <div class="viewcode-block" id="Features.yaxis"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Features.yaxis">[docs]</a>    <span class="k">def</span> <span class="nf">yaxis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This method uses the describe tool in ArcPy to generate the YAxis coordinates of a feature class</span>
+        <span class="sd">&quot;&quot;&quot; Use the describe tool in ArcPy to generate the YAxis coordinates of a feature class</span>
 <span class="sd">        (for use in the fishnet tool).&quot;&quot;&quot;</span>
         <span class="n">yaxis</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">extent</span><span class="o">.</span><span class="n">XMin</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">extent</span><span class="o">.</span><span class="n">YMin</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">yaxis</span></div>
 
 <div class="viewcode-block" id="Features.opp_corner"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Features.opp_corner">[docs]</a>    <span class="k">def</span> <span class="nf">opp_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; This method uses the describe tool in ArcPy to generate the upper right corner coordinates of a</span>
+        <span class="sd">&quot;&quot;&quot; Use the describe tool in ArcPy to generate the upper right corner coordinates of a</span>
 <span class="sd">        feature class.&quot;&quot;&quot;</span>
         <span class="n">opp_corner</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">extent</span><span class="o">.</span><span class="n">XMax</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">extent</span><span class="o">.</span><span class="n">YMax</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">opp_corner</span></div>
 
 <div class="viewcode-block" id="Features.coord_sys"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Features.coord_sys">[docs]</a>    <span class="k">def</span> <span class="nf">coord_sys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method sets the coordinate system as the spatial reference of the shapefile (for the fishnet tool).&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Set the coordinate system as the spatial reference of the shapefile (for the fishnet tool).&quot;&quot;&quot;</span>
         <span class="n">coord_sys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">desc</span><span class="o">.</span><span class="n">spatialReference</span>
         <span class="k">return</span> <span class="n">coord_sys</span></div></div>
 
 
 <div class="viewcode-block" id="Fishnet"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Fishnet">[docs]</a><span class="k">class</span> <span class="nc">Fishnet</span><span class="p">(</span><span class="n">Features</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;**The Fishnet class sets up the methods to optimise the fishnet over the points file, and exporting shapefiles</span>
+    <span class="sd">&quot;&quot;&quot;**Set up the methods to optimise the fishnet over the points file, and exporting shapefiles</span>
 <span class="sd">    of points within individual cells.**&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Fishnet.grid"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Fishnet.grid">[docs]</a>    <span class="k">def</span> <span class="nf">grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_block</span><span class="p">,</span> <span class="n">numrows</span><span class="p">,</span> <span class="n">tempfishnet</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method sets up the fishnet tool from arcpy and calculates an id number for each cell of the fishnet.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Set up the fishnet tool from arcpy and calculate an id number for each cell of the fishnet.&quot;&quot;&quot;</span>
         <span class="n">origin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="p">()</span>
         <span class="n">yaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yaxis</span><span class="p">()</span>
         <span class="n">opp_corner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">opp_corner</span><span class="p">()</span>
@@ -179,7 +177,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;grid &quot;</span><span class="p">,</span> <span class="n">numcolumns</span><span class="p">,</span> <span class="s2">&quot;by&quot;</span><span class="p">,</span> <span class="n">numrows</span><span class="p">,</span> <span class="s2">&quot;complete&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Fishnet.joinpts2grid"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Fishnet.joinpts2grid">[docs]</a>    <span class="k">def</span> <span class="nf">joinpts2grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tempfishnet</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">,</span> <span class="n">fishnet_count</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method joins the points to the fishnet cells to count how many points fall in each cell.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Join the points to the fishnet cells to count how many points fall in each cell.&quot;&quot;&quot;</span>
         <span class="c1"># count points in each polygon of the fishnet</span>
         <span class="n">targetfeatures</span> <span class="o">=</span> <span class="n">tempfishnet</span>
         <span class="n">joinfeatures</span> <span class="o">=</span> <span class="nb">sorted</span>
@@ -190,7 +188,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spatial join complete&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Fishnet.intersect"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Fishnet.intersect">[docs]</a>    <span class="k">def</span> <span class="nf">intersect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid2pts</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method intersects the points with the fishnet to assign the id number of the fishnet cell within</span>
+        <span class="sd">&quot;&quot;&quot;Intersect the points with the fishnet to assign the id number of the fishnet cell within</span>
 <span class="sd">        which each point resides.&quot;&quot;&quot;</span>
         <span class="n">in_features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">OBSTRUCTIONS_final.shp&quot;</span><span class="p">,</span> <span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">OBSTRUCTIONS_fishnet_temp.shp&quot;</span><span class="p">]</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">in_features</span><span class="p">)</span>
@@ -200,7 +198,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;intersect complete&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Fishnet.divpts2cells"><a class="viewcode-back" href="../Stereoframework.html#Stereoframework.Fishnet.divpts2cells">[docs]</a>    <span class="k">def</span> <span class="nf">divpts2cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid2pts</span><span class="p">,</span> <span class="n">counter</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This method outputs the points contained within each cell to an individual shapefile.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Output the points contained within each cell to an individual shapefile.&quot;&quot;&quot;</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;OUT</span><span class="se">\\</span><span class="s2">Cells</span><span class="se">\\</span><span class="s2">Obstructions_cell&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.shp&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saving &quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
         <span class="n">where_clause</span> <span class="o">=</span> <span class="s1">&#39;&quot;id&quot; = &#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">counter</span>

@@ -1,18 +1,32 @@
-# ---------------------------------------------------------------------------
+"""Stereoheighting data preparation tool.
+Copyright (C) <2019>  <Faye Chant>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>."""
+
 #: Import modules required
-# noinspection PyUnresolvedReferences
 import arcpy
-#from arcpy import env
+from arcpy import env
 import os
 import Stereoframework
 
 
 # Input workspace
 #set workspace for ArcMap env.workspace = "C:\..."
-#env.workspace = "C:\\GEOG5991M\\Stereoheighting"
+env.workspace = "C:\\GEOG5991M\\Stereoheighting"
 
 # Set to overwrite existing files
-#arcpy.env.overwriteOutput = True
+arcpy.env.overwriteOutput = True
 
 # Set filenames to work on using Stereoframework.Files class
 files = Stereoframework.Files()
@@ -21,14 +35,14 @@ files.printing()  #: Prints the names of the files set to check class is instant
 # Model
 try:
     # Defines new fields to add to original shapefile
-    Newfields = [["INT2DBL", "DOUBLE", "2", "", "[FieldINT1]"], ["STRING2DBL", "DOUBLE", "2", "", "[Field7]"],
+    newfields = [["INT2DBL", "DOUBLE", "2", "", "[FieldINT1]"], ["STRING2DBL", "DOUBLE", "2", "", "[Field7]"],
                  ["INCSTRLEN", "STRING", "", "10", "[Field1]"], ["INDEX", "SHORT", "", "", "0"]]
     # loop through each new field and assigns the framework from the field class of the Stereoframework.py module,
     # and the attributes set in "Newfields"
     fields = []
-    for i in range(len(Newfields)):
-        attr = (Newfields[i])
-        fields.append(Stereoframework.FIELD(attr[0], attr[1], attr[2], attr[3], attr[4]))
+    for i in range(len(newfields)):
+        attr = (newfields[i])
+        fields.append(Stereoframework.Field(attr[0], attr[1], attr[2], attr[3], attr[4]))
     # Make a copy of features in orig file to work on
     arcpy.CopyFeatures_management(files.orig, files.copy, "", "0", "0", "0")
     # Add new fields to obstructions file
